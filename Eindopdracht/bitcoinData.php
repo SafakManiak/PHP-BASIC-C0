@@ -18,6 +18,7 @@
 /* 
  * Opdracht 2: Zet hier de $buttons array neer 
  */
+$buttons =  [1,2,30,50,375,15000] ;
 
 
 /******************************************* OPDRACHT 2 doe je hierboven *******************************************/
@@ -28,22 +29,21 @@
 /*******************************************************************************************************************/
 /******************************************* OPDRACHT 3 doe je hieronder *******************************************/
 /* 
- * Maak met behulp van de functie getBitcoinPrice() een berekening. 
+ * Maak met behulp van de functie getBitcoinPrice() een berekening. ,,
  * De uitkomst van de berekening moet het aantal gekochte bitcoins opleveren.
  * De functie geeft de uitkomst van die berekening terug.
  * De gebruiker kan voor een vast bedrag bitcoins kopen. 
  */
 
+
 function calculateBitcoinAmount()
 {
-    if (isset($_GET['euro'])) {
+    if (isset($_GET['euro'])) {////Gebruik je om èèn of meerdere waardes te vergelijken
         $euro = (int)$_GET['euro']; //Dit blokje code (if-statement) kun je laten staan.
+        $gekochtebitcoins =   $euro / getBitcoinPrice() ;
+    
+    return $gekochtebitcoins;//De bovenstaande functie maakt een berekening en geeft het resultaat aan ons terug
     }
-
-    //SCHRIJF JE CODE.
-
-
-
 }
 /******************************************* OPDRACHT 3 doe je hierboven *******************************************/
 /*******************************************************************************************************************/
@@ -68,18 +68,37 @@ $transactions = [
     [8832.08, 100, 0.0113],
     [9418.41, 250, 0.0265],
     [9431.84, 250, 0.0265],
-    [5211.67, 200, 0.0384]
+    [5211.67, 200, 0.0384],
+    [4638.78, 150, 0.0431],
+    
 ];
 
 if (isset($_GET['euro'])) {
 
-    $euro = $_GET['euro']; //deze regel laten staan
+    $euro = $_GET['euro']; //Een array is een speciale variabele die meer dan één waarde tegelijk kan bevatten.
+    
 
+
+    
     /* SCHRIJF HIER JE CODE.
      * Schrijf hieronder de code om de gekochte bitcoin aan de array $transactions toe te voegen.
      * Je voegt een bitcoinprijs toe, de prijs in euro's en het aantal gekochte bitcoins.
      */
+    array_push($transactions, [getBitcoinPrice(), $euro, calculateBitcoinAmount() ]);
 }
+                               //de prijs voor de bitcoin, het koop bedrag, hoeveel je per bitcoin hebt betaalt
+
+//een variable die meerder waardes heeft noem je een array
+// dus transactions is een variable een varaiblle met meerdere waardes noem je een array
+
+//de array geeft 3 waardes
+//waarde 1 getBitcoinPrice=de prijs voor 1 bitcoin//
+//waarde 2 euro= is het tarief die button waar je op heb geklik
+//waarde 3 calculateBitcoinAmount= hoeveel bitcoins je dan gekocht heb   
+
+
+   
+    
 
 
 
@@ -92,7 +111,7 @@ if (isset($_GET['euro'])) {
 /*******************************************************************************************************************/
 /************************* De functies hieronder heb je nodig en hoef je niet aan te passen ************************/
 
-// Deze functie geeft de laatste prijs van bitcoin in euro's terug
+// Deze functie geeft de laatste prijs van bitcoin in euro's terug dus de waarde
 function getBitcoinPrice()
 {
 
